@@ -40,9 +40,9 @@ python demo/pcd_seg_demo.py test1.bin my_cylinder3d.py work_dirs/my_cylinder3d/e
 ```
 
 参数说明：
-- `test1.bin`: 输入的点云文件
+- `test1.bin`: 输入的点云文件（替补为需要预测的点云数据）
 - `my_cylinder3d.py`: 模型配置文件
-- `work_dirs/my_cylinder3d/epoch_128.pth`: 训练好的模型权重文件
+- `work_dirs/my_cylinder3d/epoch_128.pth`: 训练好的模型权重文件（替换位训练权重）
 - `--show`: 显示预测结果
 
 ## 环境要求
