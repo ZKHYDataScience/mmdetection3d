@@ -1,7 +1,0 @@
-tools         文件夹里是训练 & 预测 代码
-
-训练：python tools/train.py configs/cylinder3d/cylinder3d_8xb2-laser-polar-mix-3x_semantickitti.py
-预测：python tools/test.py configs/cylinder3d/cylinder3d_8xb2-laser-polar-mix-3x_semantickitti.py work_dirs/cylinder3d_8xb2-laser-polar-mix-3x_semantickitti/epoch_36.pth --task lidar_seg
-
-
-configs：配置

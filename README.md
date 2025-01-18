@@ -1,60 +1,72 @@
-# MMDetection3D  配置说明项目（Cylinder3D）
+# MMDetection3D 配置说明项目（Cylinder3D）
 
 ## 项目简介
 
-本项目主要包含了 MMDetection3D 框架下 Cylinder3D 模型的配置文件，提供了原始版本和修改版本。
+本项目主要包含了基于 MMDetection3D 框架的 Cylinder3D 模型配置文件，针对特定数据进行了修改。
 
 ## 文件结构
 
 ```
 .
-├── mmdetection3d_original/    # 原始 MMDetection 的 Cylinder3D 模型配置
-│   ├── [配置文件列表]
-│   └── ...
-├── mmdetection3d_after/      # 修改后的 MMDetection 的 Cylinder3D 模型配置
-│   ├── [配置文件列表]
-│   └── ...
-└── 安装教程.txt              # 详细的环境配置和安装步骤说明
+├── tools/                     # 训练相关工具
+│   └── train.py              # 训练脚本
+├── demo/                     # 演示和测试工具
+│   └── pcd_seg_demo.py      # 点云分割演示脚本
+├── work_dirs/               # 训练输出目录
+│   └── my_cylinder3d/       # 模型训练结果
+│       └── epoch_128.pth    # 训练好的模型权重
+├── my_cylinder3d.py         # 模型配置文件
+└── 安装教程.txt             # 详细的环境配置和安装步骤说明
 ```
 
-## 配置文件说明
+## 使用说明
 
-### 原始配置 (mmdetection3d_original)
-- 包含原始 Cylinder3D 模型在 MMDetection3D 框架下的标准配置
-- 保持了原始论文中的模型结构和参数设置
+### 训练模型
 
-### 修改后配置 (mmdetection3d_after)
-- 包含经过对应自身数据修改的 Cylinder3D 模型配置
+使用以下命令进行模型训练：
 
+```bash
+python tools/train.py my_cylinder3d.py
+```
 
-## 安装教程
+训练完成后，模型权重文件将保存在 `work_dirs/my_cylinder3d/` 目录下。
 
-1. 创建 Conda 环境
-   conda create --name openmmlab python=3.8 -y
+### 预测/推理
 
-2. 激活环境
-   conda activate openmmlab
+使用以下命令进行点云分割预测：
 
-3. 安装 PyTorch 和 torchvision
-   pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+```bash
+python demo/pcd_seg_demo.py test1.bin my_cylinder3d.py work_dirs/my_cylinder3d/epoch_128.pth --show
+```
 
-4. 安装 OpenMIM 和 MM 工具包
-   pip install openmim
-   mim install mmengine
-   mim install mmdet
-   mim install mmsegmentation
-   mim install mmdet3d
+参数说明：
+- `test1.bin`: 输入的点云文件
+- `my_cylinder3d.py`: 模型配置文件
+- `work_dirs/my_cylinder3d/epoch_128.pth`: 训练好的模型权重文件
+- `--show`: 显示预测结果
 
-5. 安装 MMCV
-   从以下链接下载适合环境的 .whl 文件：
-   https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+## 环境要求
 
-   cd 到下载目录
-   pip install mmcv-2.1.0-cp38-cp38-manylinux1_x86_64.whl
+- Python 3.8
+- CUDA 11.8
+- PyTorch 2.0.1
+- MMCV 2.1.0
+- MMDetection3D 及相关依赖
 
-6. 测试安装
-   # 下载 mmdet3d 配置文件
-   mim download mmdet3d --config pointpillars_hv_secfpn_8xb6-160e_kitti-3d-car --dest .
+## 安装步骤
 
-   # 运行测试
-   python demo/pcd_demo.py demo/data/kitti/000008.bin temp/pointpillars_hv_secfpn_8xb6-160e_kitti-3d-car.py temp/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth --show
+详细的安装步骤请参考 `安装教程.txt`，主要包括：
+
+1. Conda 环境配置
+2. PyTorch 安装
+3. MM 系列工具包安装
+4. MMCV 安装
+5. 环境测试
+
+## 注意事项
+
+- 确保已正确安装所有依赖包
+- 训练前检查 `my_cylinder3d.py` 配置文件中的参数设置
+- 预测时确保输入点云文件格式正确
+- 如遇到 CUDA 相关错误，请检查 GPU 驱动和 CUDA 版本是否匹配
+
