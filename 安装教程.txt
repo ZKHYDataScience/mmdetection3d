@@ -1,6 +1,6 @@
 mmdetection 通用安装
 
-驱动
+驱动（cpu可跳过）
 查看：nvidia-smi
 如果有返回相关驱动信息，说明驱动有安装，直接跳过驱动这块，直接后续安装
 如果没有，则安装驱动
@@ -16,7 +16,7 @@ sudo apt install gcc g++
 9.安装：sudo bash ./NVIDIA-Linux-x86_64-535.216.01.run
 10.重启系统：sudo reboot
 
-安装cuda
+安装cuda（cpu可跳过）
 1. wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
 2. sudo sh cuda_11.8.0_520.61.05_linux.run
 3.设置环境变量
@@ -40,7 +40,7 @@ conda create --name openmmlab python=3.8 -y
 2. 激活环境
 conda activate openmmlab
 
-3. 安装 PyTorch 和 torchvision
+3. 安装 PyTorch 和 torchvision（cpu版可替换对应:pip install torch==2.4.1  torchvision==0.19.1）
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
 4. 安装 OpenMIM 和 MM 工具包
@@ -51,6 +51,8 @@ mim install mmsegmentation
 mim install mmdet3d
 
 5. 安装 MMCV
+（cpu版替换，网址对应：https://download.openmmlab.com/mmcv/dist/cpu/torch2.1.0/index.html 下载选择，选对应系统版本，以wins举例：mmcv-2.1.0-cp38-cp38-win_amd64.whl ；cd 到此路径，安装mmcv
+pip install mmcv-2.1.0-cp38-cp38-win_amd64.whl）
 直接从 OpenMMLab 的源头下载并安装 mmcv。访问以下链接获取适合环境的 .whl 文件：
 https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
 
