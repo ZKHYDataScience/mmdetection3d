@@ -57,46 +57,77 @@ python demo/pcd_seg_demo.py test1.bin my_cylinder3d.py work_dirs/my_cylinder3d/e
 
 
 驱动（cpu可跳过）
+
 查看：nvidia-smi
+
 如果有返回相关驱动信息，说明驱动有安装，直接跳过驱动这块，直接后续安装
+
 如果没有，则安装驱动
+
 1.查找驱动：apt search nvidia
+
 2.会显示合适的驱动版本，比如安装其中的535：sudo apt install nvidia-driver-535
+
 3.赋予权限：chmod 755 NVIDIA-Linux-x86_64-535.216.01.run
+
 4.安gcc：sudo apt update
+
 sudo apt install gcc g++
+
 5.安内核：sudo apt install linux-headers-$(uname -r)
+
 6.升级内核：sudo update kernel
+
 7.进入虚拟终端：Ctrl + Alt + f1 
+
 8. 停止显示管理：systemctl stop lightdm
+   
 9.安装：sudo bash ./NVIDIA-Linux-x86_64-535.216.01.run
+
 10.重启系统：sudo reboot
 
 安装cuda（cpu可跳过）
+
 1. wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
+
 2. sudo sh cuda_11.8.0_520.61.05_linux.run
+
 3.设置环境变量
+
  nano ~/.bashrc
+
 export CUDA_HOME=/usr/local/cuda
+
 export PATH=$CUDA_HOME/bin:$PATH
+
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
 Source ~/.bashrc
 
 安装anaconda
+
 1. 安装Linux的Anaconda安装包
+
 2. 可将安装包移动到Linux的/home/username/下，或其他有权限能读写的路径
+
 3. 安装Anaconda：bash Anaconda3-2024.10-1-Linux-x86_64.sh
+
 （或快速安装：sudo bash Anaconda3-2024.10-1-Linux-x86_64.sh -b -p /home/lenovo/anaconda3）
+
 4. 导入路径：source ~/.bashrc
 
 环境
+
 1. 创建 Conda 环境
+
 conda create --name openmmlab python=3.8 -y
 
 2. 激活环境
+
 conda activate openmmlab
 
 3. 安装 PyTorch 和 torchvision（cpu版可替换对应:pip install torch==2.4.1  torchvision==0.19.1）
+
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
 4. 安装 OpenMIM 和 MM 工具包
