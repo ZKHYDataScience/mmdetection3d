@@ -3,7 +3,7 @@
 # i.e. we consider the unlabeled class as the last one, which is different
 # from the original implementation of some methods e.g. Cylinder3D.
 dataset_type = 'MySemKittiDataset' #'SemanticKittiDataset'
-data_root = 'data/mySemKitti_bar_v2'
+data_root = 'data/mySemKitti_bar'
 # data_root = 'data/mySemKitti/'
 # data_root = 'data/mySemKitti_cir30/'
 

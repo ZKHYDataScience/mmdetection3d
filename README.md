@@ -60,6 +60,15 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
 
 使用混合精度训练 (AMP)，并针对 SemanticKITTI 数据集。
 
+
+## 配置修改
+对于 SPVCNN 模型，已修改以下内容：
+
+#### 分类数：分类数已修改为 14 类，以适应自定义数据集的分类需求。
+#### 数据集类型：使用自定义数据集 MySemKittiDataset，而不是默认的 SemanticKittiDataset。
+#### 数据范围：修改了 point_cloud_range 为 [-5, -5, -5, 150, 300, 30]。对应米级别。
+#### 体素大小：修改了 voxel_size 为 [1, 1, 0.1]，以适配数据的分辨率和尺度。
+
 ## 数据处理
 
 项目包含数据格式转换工具：
