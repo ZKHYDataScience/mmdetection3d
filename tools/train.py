@@ -10,7 +10,31 @@ from mmengine.registry import RUNNERS
 from mmengine.runner import Runner
 
 from mmdet3d.utils import replace_ceph_backend
+import sys
+sys.argv = ['train.py', 'configs/spvcnn/spvcnn_w20_8xb2-amp-15e_semantickitti.py']  #okjust
 
+import numpy as np
+# from matplotlib import pyplot as plt
+
+# "./data/mySemKitti/sequences/00/velodyne/000000.bin"
+# a = np.fromfile("./data/mySemKitti_bar/sequences/00/labels/000000.label", dtype=np.int32)
+# b = []
+# for i in range(22):
+    # b.append(np.fromfile(f"./data/mySemKitti_bar_v2/sequences/00/velodyne/{i:06}.bin", dtype=np.float32).reshape(-1, 4))
+    # pass
+    # b[:, :3] = b[:, :3] / 1000
+    # b.tofile(f"./data/mySemKitti_bar_v2/sequences/01/velodyne/{i:06}.bin")
+# b = np.fromfile(f"./data/mySemKitti_bar_v2/sequences/01/velodyne/{1:06}.bin", dtype=np.float32).reshape(-1, 4)
+# b.tofile("data/test/cir/bar_test.bin")
+# exit(0)
+# b = np.concatenate(b, 0)
+# plt.hist(b[:, 0], 100, label='x', alpha=0.5)
+# plt.hist(b[:, 1], 100, label='y', alpha=0.5)
+# plt.hist(b[:, 2], 100, label='z', alpha=0.5)
+# plt.legend()
+# plt.show()
+# exit(0)
+# print("123456789")
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a 3D detector')

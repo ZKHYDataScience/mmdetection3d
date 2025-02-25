@@ -6,7 +6,12 @@ from argparse import ArgumentParser
 from mmengine.logging import print_log
 
 from mmdet3d.apis import LidarSeg3DInferencer
-
+import sys
+sys.argv = ['pcd_seg_demo.py', 
+            'data/test/cir/bar_test.bin', 
+            'configs/minkunet/minkunet34_w32_torchsparse_8xb2-amp-laser-polar-mix-3x_semantickitti.py', 
+            'work_dirs/minkunet34_w32_torchsparse_8xb2-amp-laser-polar-mix-3x_semantickitti/epoch_7_cir.pth', 
+            '--show']
 
 def parse_args():
     parser = ArgumentParser()

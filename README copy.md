@@ -1,70 +1,49 @@
-# MMDetection3D SPVCNN 配置项目
+# MMDetection3D 配置说明项目（spvcnn）
 
 ## 项目简介
 
-本项目包含基于 MMDetection3D 框架的 SPVCNN 模型配置文件，针对特定数据集进行了修改。
+本项目主要包含了基于 MMDetection3D 框架的 spvcnn 模型配置文件，针对特定数据进行了修改。
 
-## 目录结构
+## 文件结构
 
 ```
-MMDETECTION3D/
-├── configs/                   # 配置文件
-│   ├── _base_/                # 基础配置组件
-│   │   ├── datasets/          # 数据集配置
-│   │   │   └── semantickitti.py
-│   │   └── models/            # 模型基础配置
-│   │       ├── spvcnn.py
-│   │       └── default_runtime.py
-│   └── spvcnn/                # SPVCNN 特定配置
-│       ├── spvcnn_w20_8xb2-amp-15e_semantickitti.py
-│       └── spvcnn_w32_8xb2-amp-15e_semantickitti.py
-├── demo/                      # 演示脚本
-│   └── pcd_seg_demo.py        # 点云分割演示
-├── tools/                     # 训练和实用工具
-│   └── train.py               # 训练脚本
-├── trans/                     # 数据转换工具
-│   ├── binjson2csv.py         # 二进制/JSON 转 CSV
-│   └── csv2kitti.py           # CSV 转 KITTI 格式
-├── README.md                  # 项目文档
-└── run_tips.sh                # 快速使用脚本
+.
+├── tools/                     # 训练相关工具
+│   └── train.py              # 训练脚本
+├── demo/                     # 演示和测试工具
+│   └── pcd_seg_demo.py      # 点云分割演示脚本
+├── work_dirs/               # 训练输出目录
+│   └── my_cylinder3d/       # 模型训练结果
+│       └── epoch_128.pth    # 训练好的模型权重
+├── my_cylinder3d.py         # 模型配置文件
+└── 安装教程.txt             # 详细的环境配置和安装步骤说明
 ```
 
-## 快速开始
+## 使用说明
 
-### 训练
+### 训练模型
 
-使用以下命令训练 SPVCNN 模型：
+使用以下命令进行模型训练：
 
 ```bash
-python tools/train.py configs/spvcnn/spvcnn_w20_8xb2-amp-15e_semantickitti.py
+python tools/train.py my_cylinder3d.py
 ```
 
-模型权重将保存在 `work_dirs/` 目录中。
+训练完成后，模型权重文件将保存在 `work_dirs/my_cylinder3d/` 目录下。
 
-### 推理
+### 预测/推理
 
-对点云进行推理：
+使用以下命令进行点云分割预测：
 
 ```bash
-python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-amp-15e_semantickitti.py [检查点文件] --show
+python demo/pcd_seg_demo.py test1.bin my_cylinder3d.py work_dirs/my_cylinder3d/epoch_128.pth --show
 ```
 
 参数说明：
-- `[输入点云文件]`：输入的点云文件
-- `[检查点文件]`：训练好的模型权重
-- `--show`：显示结果可视化
-
-## 模型配置
-
-- `spvcnn_w20_8xb2-amp-15e_semantickitti.py`：宽度为 20 的 SPVCNN
-
-使用混合精度训练 (AMP)，并针对 SemanticKITTI 数据集。
-
-## 数据处理
-
-项目包含数据格式转换工具：
-- `binjson2csv.py`：将预测后二进制/JSON 文件转换为 CSV 格式
-- `csv2kitti.py`：将 CSV 数据转换为 KITTI 格式，以便用于 MMDetection3D 训练
+- `test1.bin`: 输入的点云文件（替换为需要预测的点云数据）
+- `my_cylinder3d.py`: 模型配置文件
+- `work_dirs/my_cylinder3d/epoch_128.pth`: 训练好的模型权重文件
+- `--show`: 显示预测结果
 
 ## 环境要求
 
@@ -73,11 +52,8 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
 - PyTorch 2.0.1
 - MMCV 2.1.0
 - MMDetection3D 及相关依赖
-- torchsparse 1.4.0
 
-## 安装指南
-
-请按照以下步骤设置环境：
+## 安装教程
 
 ### 安装驱动（CPU 可跳过）
 
@@ -197,7 +173,9 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
    python demo/pcd_demo.py demo/data/kitti/000008.bin temp/pointpillars_hv_secfpn_8xb6-160e_kitti-3d-car.py temp/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth --show
    ```
 
+## 注意事项
 
-## 使用技巧
-
-查看 `run_tips.sh` 获取快速命令和常见操作。
+- 确保已正确安装所有依赖包
+- 训练前检查 `my_cylinder3d.py` 配置文件中的参数设置
+- 预测时确保输入点云文件格式正确
+- 如遇到 CUDA 相关错误，请检查 GPU 驱动和 CUDA 版本是否匹配
