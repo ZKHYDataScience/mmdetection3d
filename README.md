@@ -114,6 +114,29 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
    sudo bash ./NVIDIA-Linux-x86_64-535.216.01.run
    sudo reboot
    ```
+   
+### 安装gcc
+   ```bash
+ gcc --version
+ g++ --version
+sudo apt update
+sudo apt install gcc-9 g++-9
+创建gcc软链接：
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100
+
+需要添加到环境变量：
+export PATH=/usr/bin:$PATH
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+
+可以：
+sudo ln -s /usr/local/bin/gcc /usr/bin/gcc
+sudo ln -s /usr/local/bin/g++ /usr/bin/g++
+
+检查：
+gcc --version
+   ```
 
 ### 安装 CUDA（CPU 可跳过）
 
@@ -173,9 +196,15 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
    ```bash
    pip install openmim
    mim install mmengine
-   mim install mmdet
+   mim install mmdet==3.2.0
    mim install mmsegmentation
-   mim install mmdet3d
+   ```
+   
+4.安装mmdet3d
+   ```bash
+   git clone https://github.com/open-mmlab/mmdetection3d.git
+   cd mmdetection3d
+   pip install -v -e .
    ```
 
 4. 安装 MMCV：
@@ -190,8 +219,17 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
    ```
 
 5. 安装 torchsparse：
+方法一：
    ```bash
-   pip install torchsparse==1.4.0
+   sudo apt install libsparsehash-dev
+   pip install --upgrade git+https://github.com/mit-han-lab/torchsparse.git@v1.4.0
+   ```
+方法二：
+   ```bash
+   sudo apt install p7zip-full
+   7z x torchsparse.7z
+   cd torchsparse
+   pip install -e .
    ```
 
 ### 测试安装
