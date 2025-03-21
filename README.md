@@ -224,7 +224,7 @@ gcc --version
    sudo apt install libsparsehash-dev
    pip install --upgrade git+https://github.com/mit-han-lab/torchsparse.git@v1.4.0
    ```
-方法二：
+   方法二：
    ```bash
    sudo apt install p7zip-full
    7z x torchsparse.7z
