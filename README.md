@@ -88,7 +88,7 @@ python demo/pcd_seg_demo.py [输入点云文件] configs/spvcnn/spvcnn_w32_8xb2-
 
 请按照以下步骤设置环境：
 
-### 安装驱动（CPU 可跳过）
+### 安装驱动
 
 1. 查看驱动状态：
    ```bash
@@ -138,7 +138,7 @@ sudo ln -s /usr/local/bin/g++ /usr/bin/g++
 gcc --version
    ```
 
-### 安装 CUDA（CPU 可跳过）
+### 安装 CUDA
 
 1. 下载并安装 CUDA：
    ```bash
@@ -188,8 +188,6 @@ gcc --version
    ```bash
    # GPU 版本
    pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
-   # CPU 版本
-   # pip install torch==2.4.1 torchvision==0.19.1
    ```
 
 3. 安装 OpenMIM 和 MM 工具包：
@@ -212,10 +210,6 @@ gcc --version
    # GPU 版本（根据实际环境选择对应版本）
    # 从 https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html 下载
    pip install mmcv-2.1.0-cp38-cp38-manylinux1_x86_64.whl
-   
-   # CPU 版本
-   # 从 https://download.openmmlab.com/mmcv/dist/cpu/torch2.1.0/index.html 下载
-   # pip install mmcv-2.1.0-cp38-cp38-win_amd64.whl
    ```
 
 5. 安装 torchsparse：
